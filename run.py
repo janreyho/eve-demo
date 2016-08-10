@@ -18,6 +18,7 @@
 import os
 from eve import Eve
 from eve_swagger import swagger
+from flask.ext.sentinel import ResourceOwnerPasswordCredentials, oauth
 
 # Heroku support: bind to PORT if defined, otherwise default to 5000.
 if 'PORT' in os.environ:
@@ -30,6 +31,10 @@ else:
     host = '127.0.0.1'
 
 app = Eve()
+
+# add eve-swagger
+# /api-docs
+# curl -k -H "Authorization: Bearer tnIpW1XWyrrUQSlIUZbG2O2TNjp3W7" https://localhost:5000/api-docs
 app.register_blueprint(swagger)
 
 # required. See http://swagger.io/specification/#infoObject for details.
@@ -51,5 +56,14 @@ app.config['SWAGGER_INFO'] = {
 # optional. Will use flask.request.host if missing.
 app.config['SWAGGER_HOST'] = 'myhost.com'
 
+# add flask-sentinel
+# curl -k -X POST -d "client_id=o0DKRNzRNJouovo2oJupkto8jDFwa6NouU7cOQ5N&grant_type=password&username=janreyho&password=123456" https://localhost:5000/oauth/token
+# curl -k -H "Authorization: Bearer tnIpW1XWyrrUQSlIUZbG2O2TNjp3W7" https://localhost:5000/
+@app.route('/endpoint')
+@oauth.require_oauth()
+def restricted_access():
+    return "You made it through and accessed the protected resource!"
+
 if __name__ == '__main__':
-    app.run(host=host, port=port)
+    ResourceOwnerPasswordCredentials(app)
+    app.run(host=host, port=port,ssl_context='adhoc')
