@@ -24,3 +24,6 @@ Eve repository for an up-to-date features list.
 .. _Eve: http://python-eve.org
 .. _run.py: https://github.com/nicolaiarocci/eve-demo/blob/master/run.py
 .. _settings.py: https://github.com/nicolaiarocci/eve-demo/blob/master/settings.py
+
+	curl -d '{"title": "software", "description": "xuebaketang", "owner":"57ac1ca09d7d9b859440b9b5"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/works
+	curl -d '{"title": "software", "description": "xuebaketang", "owner":"57a83a96c3666e27d84e441c"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/works
