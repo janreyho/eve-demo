@@ -27,3 +27,8 @@ Eve repository for an up-to-date features list.
 
 	curl -d '{"title": "software", "description": "xuebaketang", "owner":"57ac1ca09d7d9b859440b9b5"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/works
 	curl -d '{"title": "software", "description": "xuebaketang", "owner":"57a83a96c3666e27d84e441c"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/works
+
+
+	curl -d '{"username": "janreyho", "nickname": "janrey"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/students
+	curl -d '{"username": "zhuxinqi", "nickname": "朱老师"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/teachers
+	curl -d '{"teacherID": "zhuxinqi", "studentID": "123"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/courses
