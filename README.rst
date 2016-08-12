@@ -31,4 +31,6 @@ Eve repository for an up-to-date features list.
 
 	curl -d '{"username": "janreyho", "nickname": "janrey"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/students
 	curl -d '{"username": "zhuxinqi", "nickname": "朱老师"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/teachers
-	curl -d '{"teacherID": "zhuxinqi", "studentID": "123"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/courses
+	curl -d '{"teacherID": "57ad77a59d7d9bb64d54eccd", "studentID": "57ad92309d7d9bc03957bffd"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/courses
+
+	curl -d '{"teacherID": "57ad77a59d7d9bb64d54eccd", "studentID": "57ad92309d7d9bc03957bffd", "startTime": "Tue, 29 Mar 2016 09:52:28 GMT", "duration": 40, "status": "created"}' -H 'Content-Type: application/json' http://127.0.0.1:5000/courses

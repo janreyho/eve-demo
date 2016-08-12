@@ -119,6 +119,16 @@ courses = {
                 'embeddable': True
             },
         },
+        'startTime': {
+            'type': 'datetime',
+        },
+        'duration': {
+            'type': 'integer',
+        },
+        'status': {
+            'type': 'string', 
+            'allowed': ['created', 'qqcontact', 'prepared','telcontact', 'preHostVisit', 'started', 'completed', 'sendReport', 'preHostVisit', 'closed']
+        }
     }
 }
 

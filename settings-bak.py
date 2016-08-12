@@ -128,39 +128,6 @@ works = {
     }
 }
 
-teachers = {
-    # 'title' tag used in item links.
-    'item_title': 'user',
-
-    # by default the standard item entry point is defined as
-    # '/people/<ObjectId>/'. We leave it untouched, and we also enable an
-    # additional read-only entry point. This way consumers can also perform GET
-    # requests at '/people/<lastname>/'.
-    'additional_lookup': {
-        'url': 'regex("[\w]+")',
-        'field': 'username'
-    },
-
-    # Schema definition, based on Cerberus grammar. Check the Cerberus project
-    # (https://github.com/nicolaiarocci/cerberus) for details.
-    'schema': {
-        'username': {
-            'type': 'string',
-            'minlength': 1,
-            'maxlength': 15,
-            'required': True,
-            # talk about hard constraints! For the purpose of the demo
-            # 'lastname' is an API entry-point, so we need it to be unique.
-            'unique': True,
-        },
-        'nickname': {
-            'type': 'string',
-            'minlength': 1,
-            'maxlength': 10,
-        },
-    }
-}
-
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
 DOMAIN = {
