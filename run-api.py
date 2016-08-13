@@ -64,6 +64,14 @@ app.config['SWAGGER_HOST'] = '192.168.0.40:5000'
 # def restricted_access():
 #     return "You made it through and accessed the protected resource!"
 
+@app.route('/testapi')
+def testapi():
+    return 'testapi Hello, World!'
+
+@app.route('/students')
+def teststudents():
+    print 'students Hello, World!'
+
 if __name__ == '__main__':
     # ResourceOwnerPasswordCredentials(app)
     # app.run(host=host, port=port,ssl_context='adhoc')
