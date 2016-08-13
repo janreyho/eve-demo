@@ -17,7 +17,13 @@
 
 from eve import Eve
 from eve.auth import BasicAuth
+from eve.auth import TokenAuth
 
+
+# class MyBasicAuth(BasicAuth):
+#     def check_auth(self, username, password, allowed_roles, resource,
+#                    method):
+#         return username == 'admin' and password == 'secret'
 
 class MyBasicAuth(BasicAuth):
     def check_auth(self, username, password, allowed_roles, resource, method):
@@ -29,7 +35,38 @@ class MyBasicAuth(BasicAuth):
         else:
             return username == 'admin' and password == 'secre'
 
+class BCryptAuth(BasicAuth):
+    def check_auth(self, username, password, allowed_roles, resource, method):
+        # use Eve's own db driver; no additional connections/resources are used
+        print username
+        print password
+        accounts = app.data.driver.db['students']
+        account = accounts.find_one({'username': 'janreyho2'})
+        print account['password']
+        return account and \
+            bcrypt.hashpw(password, account['password']) == account['password']
+
+class Sha1Auth(BasicAuth):
+    def check_auth(self, username, password, allowed_roles, resource, method):
+        # use Eve's own db driver; no additional connections/resources are used
+        accounts = app.data.driver.db['accounts']
+        account = accounts.find_one({'username': username})
+        return account and \
+            check_password_hash(account['password'], password)
+
+class TokenAuth(TokenAuth):
+    def check_auth(self, token, allowed_roles, resource, method):
+        """For the purpose of this example the implementation is as simple as
+        possible. A 'real' token should probably contain a hash of the
+        username/password combo, which sould then validated against the account
+        data stored on the DB.
+        """
+        # use Eve's own db driver; no additional connections/resources are used
+        accounts = app.data.driver.db['accounts']
+        return accounts.find_one({'token': token})
+
 app = Eve(auth=MyBasicAuth)
 
 if __name__ == '__main__':
+    # app = Eve(auth=BCryptAuth)
     app.run()

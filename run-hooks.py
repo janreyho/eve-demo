@@ -16,6 +16,7 @@
 """
 
 from eve import Eve
+import bcrypt
 
 
 def piterpy(endpoint, response):
@@ -33,16 +34,47 @@ def pre_contacts_get_callback(request, payload):
     print 'A pre get on "contacts" was just performed!'
     print request
     print payload
-    abort(403)
+
 
 def post_contacts_get_callback(request, payload):
     print 'A post get on "contacts" was just performed!'
 
+
+
+
+def pre_students_post_callback(request):
+    # assert request.path == '/students'
+    # assert request.method == 'POST'
+    print 'pre_students_post_callback'
+    print request.path
+    print request.method
+    print request.get_json()["password"]
+    passwd = request.get_json()["password"]
+    print passwd.encode('utf-8')
+    # print request.data
+    print bcrypt.hashpw(passwd.encode('utf-8'), bcrypt.gensalt())
+    request.get_json()["password"] = bcrypt.hashpw(passwd.encode('utf-8'), bcrypt.gensalt())
+    print request.get_json()["password"]
+
+def post_students_post_callback(request, lookup):
+    print 'post_students_post_callback'
+    print request
+    print lookup["username"]
+
+def pre_teachers_post_callback(request, payload):
+    print 'pre_teachers_post_callback'
+    print request
+
 app = Eve()
+app.debug = True
 # app.on_fetched_resource += piterpy
 # app.on_post_GET += post_get_callback
-app.on_pre_GET_students += pre_contacts_get_callback
+# app.on_pre_GET_students += pre_contacts_get_callback
 # app.on_post_GET_students += post_contacts_get_callback
+
+app.on_pre_POST_students += pre_students_post_callback
+# app.on_post_POST_students += post_students_post_callback
+# app.on_pre_POST_teachers += pre_teachers_post_callback
 
 if __name__ == '__main__':
     app.run()

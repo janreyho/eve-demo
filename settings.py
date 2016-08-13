@@ -62,6 +62,10 @@ teachers = {
             'required': True,
             'unique': True,
         },
+        'password': {
+            'type': 'string',
+            'required': True,
+        },
         'nickname': {
             'type': 'string',
             'minlength': 1,
@@ -85,6 +89,10 @@ students = {
             'maxlength': 15,
             'required': True,
             'unique': True,
+        },
+        'password': {
+            'type': 'string',
+            'required': True,
         },
         'nickname': {
             'type': 'string',
