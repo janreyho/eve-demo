@@ -31,6 +31,8 @@ def post_get_callback(resource, request, payload):
 
 def pre_contacts_get_callback(request, payload):
     print 'A pre get on "contacts" was just performed!'
+    print request
+    print payload
     abort(403)
 
 def post_contacts_get_callback(request, payload):

@@ -21,7 +21,13 @@ from eve.auth import BasicAuth
 
 class MyBasicAuth(BasicAuth):
     def check_auth(self, username, password, allowed_roles, resource, method):
-        return username == 'admin' and password == 'secret'
+        print username
+        print password
+        if resource in ('students', 'courses'):
+            # 'zipcodes' and 'countries' are public
+            return True
+        else:
+            return username == 'admin' and password == 'secre'
 
 app = Eve(auth=MyBasicAuth)
 
