@@ -24,7 +24,7 @@ from eve.utils import parse_request, home_link, querydef, config
 from eve.versioning import synthesize_versioned_document, versioned_id_field, \
     get_old_document, diff_document
 
-
+print "#get.py ratelimit requires_auth pre_event"
 @ratelimit()
 @requires_auth('resource')
 @pre_event

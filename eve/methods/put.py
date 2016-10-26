@@ -26,7 +26,7 @@ from eve.validation import ValidationError
 from eve.versioning import resolve_document_version, \
     insert_versioning_documents, late_versioning_catch
 
-
+print "#put.py ratelimit requires_auth pre_event"
 @ratelimit()
 @requires_auth('item')
 @pre_event

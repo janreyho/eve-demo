@@ -24,7 +24,7 @@ from eve.methods.common import parse, payload, ratelimit, \
 from eve.versioning import resolve_document_version, \
     insert_versioning_documents
 
-
+print "#post.py ratelimit requires_auth pre_event"
 @ratelimit()
 @requires_auth('resource')
 @pre_event

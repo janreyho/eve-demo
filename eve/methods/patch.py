@@ -24,7 +24,7 @@ from eve.methods.common import get_document, parse, payload as payload_, \
 from eve.versioning import resolve_document_version, \
     insert_versioning_documents, late_versioning_catch
 
-
+print "#patch.py ratelimit requires_auth pre_event"
 @ratelimit()
 @requires_auth('item')
 @pre_event

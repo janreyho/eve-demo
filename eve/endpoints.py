@@ -102,7 +102,7 @@ def item_endpoint(**lookup):
         abort(405)
     return send_response(resource, response)
 
-
+print "#endpoint.py ratelimit requires_auth"
 @ratelimit()
 @requires_auth('home')
 def home_endpoint():

@@ -13,6 +13,21 @@ from flask import request, Response, current_app as app, g, abort
 from functools import wraps
 
 
+# def log(text):
+#     def decorator(func):
+        # @functools.wraps(func)
+#         def wrapper(*args, **kw):
+#             print '%s %s():' % (text, func.__name__)
+#             return func(*args, **kw)
+#         return wrapper
+#     return decorator
+
+# @log('execute')
+# def now():
+#     print '2013-12-25'
+
+# now = log('execute')(now)
+# #首先执行log('execute')，返回的是decorator函数，再调用返回的函数，参数是now函数，返回值最终是wrapper函数。
 def requires_auth(endpoint_class):
     """ Enables Authorization logic for decorated functions.
 
@@ -30,9 +45,12 @@ def requires_auth(endpoint_class):
 
     .. versionadded:: 0.0.4
     """
+    print "requires_auth"
     def fdec(f):
+        print "fdec @wraps(f)"
         @wraps(f)
         def decorated(*args, **kwargs):
+            print "decorated"
             if endpoint_class == 'resource' or endpoint_class == 'item':
                 # find resource name in f's args
                 if args:
@@ -154,7 +172,11 @@ class BasicAuth(object):
                               string or a list of roles.
         :param resource: resource being requested.
         """
+        print request
+        print request.headers
+        print request.headers["Authorization"]
         auth = request.authorization
+        print auth
         if auth:
             self.set_user_or_token(auth.username)
         return auth and self.check_auth(auth.username, auth.password,

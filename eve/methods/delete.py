@@ -20,7 +20,7 @@ from eve.versioning import versioned_id_field, resolve_document_version, \
 from datetime import datetime
 import copy
 
-
+print "#delete.py ratelimit requires_auth pre_event"
 @ratelimit()
 @requires_auth('item')
 @pre_event

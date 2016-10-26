@@ -151,8 +151,11 @@ class Eve(Flask, Events):
 
         self.media = media(self) if media else None
         self.redis = redis
-
+        print "auth"
         if auth:
+            print "hejiayi"
+            print self
+            print auth
             self.auth = auth() if callable(auth) else auth
         else:
             self.auth = None
