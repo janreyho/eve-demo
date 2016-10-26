@@ -30,7 +30,8 @@ else:
     port = 5000
     host = '127.0.0.1'
 
-app = Eve()
+SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'settings.py')
+app = Eve(settings=SETTINGS_PATH)
 
 # add eve-swagger
 # /api-docs

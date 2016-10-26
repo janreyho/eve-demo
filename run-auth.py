@@ -18,22 +18,22 @@
 from eve import Eve
 from eve.auth import BasicAuth
 from eve.auth import TokenAuth
-
-
-# class MyBasicAuth(BasicAuth):
-#     def check_auth(self, username, password, allowed_roles, resource,
-#                    method):
-#         return username == 'admin' and password == 'secret'
+import os
 
 class MyBasicAuth(BasicAuth):
-    def check_auth(self, username, password, allowed_roles, resource, method):
-        print username
-        print password
-        if resource in ('students', 'courses'):
-            # 'zipcodes' and 'countries' are public
-            return True
-        else:
-            return username == 'admin' and password == 'secre'
+    def check_auth(self, username, password, allowed_roles, resource,
+                   method):
+        return username == 'admin' and password == 'secret'
+
+# class MyBasicAuth(BasicAuth):
+#     def check_auth(self, username, password, allowed_roles, resource, method):
+#         print username
+#         print password
+#         if resource in ('students', 'courses'):
+#             # 'zipcodes' and 'countries' are public
+#             return True
+#         else:
+#             return username == 'admin' and password == 'secre'
 
 class BCryptAuth(BasicAuth):
     def check_auth(self, username, password, allowed_roles, resource, method):
@@ -65,7 +65,8 @@ class TokenAuth(TokenAuth):
         accounts = app.data.driver.db['accounts']
         return accounts.find_one({'token': token})
 
-app = Eve(auth=MyBasicAuth)
+SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'settings.py')
+app = Eve(settings=SETTINGS_PATH, auth=MyBasicAuth)
 
 if __name__ == '__main__':
     # app = Eve(auth=BCryptAuth)
