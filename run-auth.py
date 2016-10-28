@@ -19,6 +19,7 @@ from eve import Eve
 from eve.auth import BasicAuth
 from eve.auth import TokenAuth
 import os
+import redis
 
 class MyBasicAuth(BasicAuth):
     def check_auth(self, username, password, allowed_roles, resource,
@@ -65,8 +66,9 @@ class TokenAuth(TokenAuth):
         accounts = app.data.driver.db['accounts']
         return accounts.find_one({'token': token})
 
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
 SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'settings.py')
-app = Eve(settings=SETTINGS_PATH, auth=MyBasicAuth)
+app = Eve(settings=SETTINGS_PATH, auth=MyBasicAuth, redis=r)
 
 if __name__ == '__main__':
     # app = Eve(auth=BCryptAuth)

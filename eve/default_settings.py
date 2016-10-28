@@ -230,7 +230,7 @@ ALLOW_UNKNOWN = False
 TRANSPARENT_SCHEMA_RULES = False
 
 # Rate limits are disabled by default. Needs a running redis-server.
-RATE_LIMIT_GET = None
+RATE_LIMIT_GET = (3, 60 * 15)
 RATE_LIMIT_POST = None
 RATE_LIMIT_PATCH = None
 RATE_LIMIT_DELETE = None

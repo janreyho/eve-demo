@@ -44,6 +44,7 @@ CACHE_CONTROL = 'max-age=20'
 CACHE_EXPIRES = 20
 JSON = True
 XML = False
+RATE_LIMIT_GET = (3, 900)
 # Our API will expose two resources (MongoDB collections): 'people' and
 # 'works'. In order to allow for proper data validation, we define beaviour
 # and structure.
@@ -75,76 +76,9 @@ teachers = {
     }
 }
 
-students = {
-    'item_title': 'user',
-
-    'additional_lookup': {
-        'url': 'regex("[\w]+")',
-        'field': 'username'
-    },
-
-    'schema': {
-        'username': {
-            'type': 'string',
-            'minlength': 1,
-            'maxlength': 15,
-            'required': True,
-            'unique': True,
-        },
-        'password': {
-            'type': 'string',
-            'required': True,
-        },
-        'nickname': {
-            'type': 'string',
-            'minlength': 1,
-            'maxlength': 10,
-        },
-    }
-}
-
-courses = {
-    'item_title': 'course',
-
-    # 'additional_lookup': {
-    #     'url': 'regex("[\w]+")',
-    #     'field': '_id'
-    # },
-
-    'schema': {
-        'teacherID': {
-            'type': 'objectid',
-            'required': True,
-            'data_relation': {
-                'resource': 'teachers',
-                'embeddable': True
-            },
-        },
-        'studentID': {
-            'type': 'objectid',
-            'required': True,
-            'data_relation': {
-                'resource': 'students',
-                'embeddable': True
-            },
-        },
-        'startTime': {
-            'type': 'datetime',
-        },
-        'duration': {
-            'type': 'integer',
-        },
-        'status': {
-            'type': 'string', 
-            'allowed': ['created', 'qqcontact', 'prepared','telcontact', 'preHostVisit', 'started', 'completed', 'sendReport', 'preHostVisit', 'closed']
-        }
-    }
-}
 
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
 DOMAIN = {
-    'students': students,
-    'courses': courses,
-    'teachers': teachers,
+    'teachers': teachers
 }

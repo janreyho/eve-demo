@@ -153,9 +153,6 @@ class Eve(Flask, Events):
         self.redis = redis
         print "auth"
         if auth:
-            print "hejiayi"
-            print self
-            print auth
             self.auth = auth() if callable(auth) else auth
         else:
             self.auth = None

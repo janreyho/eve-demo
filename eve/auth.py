@@ -172,11 +172,7 @@ class BasicAuth(object):
                               string or a list of roles.
         :param resource: resource being requested.
         """
-        print request
-        print request.headers
-        print request.headers["Authorization"]
         auth = request.authorization
-        print auth
         if auth:
             self.set_user_or_token(auth.username)
         return auth and self.check_auth(auth.username, auth.password,
