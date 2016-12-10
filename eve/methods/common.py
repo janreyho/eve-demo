@@ -252,6 +252,8 @@ def ratelimit():
                                          if request.authorization else
                                          request.remote_addr)
                 rlimit = RateLimit(key, limit, period, True)
+
+                print key + "#" + str(rlimit.remaining)
                 if rlimit.over_limit:
                     return Response('Rate limit exceeded', 429)
                 # store the rate limit for further processing by

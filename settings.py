@@ -44,7 +44,7 @@ CACHE_CONTROL = 'max-age=20'
 CACHE_EXPIRES = 20
 JSON = True
 XML = False
-RATE_LIMIT_GET = (3, 900)
+RATE_LIMIT_GET = (6, 900)
 # Our API will expose two resources (MongoDB collections): 'people' and
 # 'works'. In order to allow for proper data validation, we define beaviour
 # and structure.
