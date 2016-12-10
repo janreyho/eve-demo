@@ -17,9 +17,11 @@
 
 from eve import Eve
 import os
+import redis
 
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
 SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'settings.py')
-app = Eve(settings=SETTINGS_PATH)
+app = Eve(settings=SETTINGS_PATH, redis=r)
 
 
 if __name__ == '__main__':
