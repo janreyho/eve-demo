@@ -20,6 +20,7 @@ from eve.auth import BasicAuth
 from eve.auth import TokenAuth
 import os
 import redis
+from eve.auth import requires_auth
 
 class MyBasicAuth(BasicAuth):
     def check_auth(self, username, password, allowed_roles, resource,
@@ -69,6 +70,12 @@ class TokenAuth(TokenAuth):
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'settings.py')
 app = Eve(settings=SETTINGS_PATH, auth=MyBasicAuth, redis=r)
+app.debug = True
+
+@app.route('/hello')
+@requires_auth('22')
+def restricted_access():
+    return "You22 made it through and accessed the protected resource!"
 
 if __name__ == '__main__':
     # app = Eve(auth=BCryptAuth)
